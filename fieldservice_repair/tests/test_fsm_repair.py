@@ -5,17 +5,17 @@ from datetime import timedelta
 
 from odoo import Command, fields
 from odoo.exceptions import ValidationError
-from odoo.tests import Form, TransactionCase
+from odoo.tests import Form
 
 from odoo.addons.base.tests.common import DISABLED_MAIL_CONTEXT
+from odoo.addons.fieldservice.tests.test_fsm_common import FSMCommon
 
 
-class TestFSMRepairCommon(TransactionCase):
+class TestFSMRepairCommon(FSMCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, **DISABLED_MAIL_CONTEXT))
-        cls.test_location = cls.env.ref("fieldservice.test_location")
         cls.stock_location = cls.env.ref("stock.stock_location_customers")
         cls.repair_type = cls.env.ref("fieldservice_repair.fsm_order_type_repair")
         cls.fsm_type = cls.env["fsm.order.type"].create(
